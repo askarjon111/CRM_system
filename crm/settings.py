@@ -1,4 +1,17 @@
 from pathlib import Path
+import os
+from django.core.exceptions import ImproperlyConfigured
+
+BASE_DIR = os.path.dirname(os.pat.abspath(__file__))
+
+def get_env_variable(var_name):
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "Set the %s enviroment variable" % var_name
+        raise ImproperlyConfigured(error_msg)
+
+ENV_ROLE = get_env_variable('ENV_ROLE')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
